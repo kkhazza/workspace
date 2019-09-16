@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+  <select id="selectlogin" resultType="hyun.jung.kim.LoginBean">
+	SELECT no, nm, id, pw FROM Login where delYn='N' and appYn='Y'
+  </select>
+  <select id="idcheck" resultType="Integer" parameterType="hyun.jung.kim.LoginBean">
+   select NVL(MAX(1), '0') from Login where id = #{id} and delYn = 'N'
+  </select>
+  <insert id="insertlogin" parameterType="hyun.jung.kim.LoginBean">
+  	INSERT INTO Login (nm,id,pw) VALUES (#{nm},#{id},#{pw})
+  </insert>
+  <update id="editlogin" parameterType="hyun.jung.kim.LoginBean">
+  	UPDATE Login SET nm = #{nm}, id = #{id}, pw = #{pw} where no = #{no}
+  </update>
+  <update id="deletelogin" parameterType="hyun.jung.kim.LoginBean">
+  	UPDATE Login SET delYn='Y' where no = #{no}
+  </update>
+   <select id="admin" resultType="hyun.jung.kim.LoginBean">
+	SELECT no, nm, id, pw, delYn, appYn FROM Login
+  </select>
+ <update id="approval" parameterType="hyun.jung.kim.LoginBean">
+  	UPDATE Login SET appYn='Y' where no = #{no}
+  </update>
+  <select id="select" parameterType="hyun.jung.kim.NoticeBean" resultType="hyun.jung.kim.NoticeBean">
+  	select no,id,title,comment from Notice
+  		where delYn = 'N'
+  		<if test="title != null">
+  			and title like '%${title}%'
+  		</if>
+  </select>
+  <select id="result" parameterType="Integer" resultType="hyun.jung.kim.NoticeBean">
+ 	select no,id,title,comment from Notice where no=#{no}
+  </select>
+  <insert id="insert" parameterType="hyun.jung.kim.NoticeBean">
+ 	INSERT INTO Notice (id,title,`COMMENT`) VALUES(#{id},#{title},#{comment})
+  </insert>
+  <update id="edit" parameterType="hyun.jung.kim.NoticeBean">
+  	UPDATE Notice SET title=#{title}, COMMENT=#{comment} WHERE NO = #{no}
+  </update>
+  <update id="delete" parameterType="hyun.jung.kim.NoticeBean">
+  	UPDATE Notice SET delYn='Y' WHERE NO = #{no}
+  </update>
+</mapper>

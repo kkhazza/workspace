@@ -1,0 +1,41 @@
+@charset "UTF-8";
+html, body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            .container {
+                width: 1000px;
+                height: 100vh;
+                background-color: lavender;
+                margin: auto;
+                justify-content: center;
+            }
+            
+            input[type="file"] {
+                width: 140px;
+                height: 140px;
+                display: none;
+            }
+            
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            
+            ul li {
+                width: 140px;
+                height: 140px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 5px solid lavenderblush;
+                box-sizing: border-box;
+                margin: 30px;
+                float: left;
+            }
+            label {
+            	font-size: 3em;
+            }
+        	

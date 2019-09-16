@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Avocado">
+  <select id="select" resultType="kr.gudi.web.ListBean">
+  	select no, title, "comment" from imgboard where delYn = 'N'
+  </select>
+   
+  <select id="result" resultType="kr.gudi.web.SelectBean" parameterType="Integer">
+   select title, "comment", fileurl from imgboard join uploadlist on imgboard.no =  uploadlist.no where imgboard.no = #{no} and delYn = 'N'
+  </select>  
+  
+  <select id="download" resultType="kr.gudi.web.UploadListBean" parameterType="Integer">
+   select no,nickname,filename,fileurl from uploadlist where no = #{no}
+  </select>
+    
+  <insert id="login" parameterType="kr.gudi.web.LoginInfoBean">
+  	insert into KAKAOUSER (ID, NICKNAME) values (#{id}, #{nickname})
+  </insert>
+  
+  <insert id="insert" parameterType="kr.gudi.web.ListBean">
+  	insert into imgboard (no, title, nickname, "comment") values (imgboard_seq.NEXTVAL, #{title}, #{nickname}, #{comment})
+  </insert>
+  
+  <select id="no" resultType="Integer" parameterType="kr.gudi.web.ListBean">
+   	select no from imgboard where title = #{title} and "comment" = #{comment}
+  </select>
+  
+  <insert id="upload" parameterType="kr.gudi.web.UploadListBean">
+  	insert into uploadlist (no, nickname, filename, fileurl) values (#{no}, #{nickname}, #{filename}, #{fileurl})
+  </insert>
+  
+  <update id="delete" parameterType="Integer">
+  	update imgboard set delYn = 'Y' where no = #{no}
+  </update>
+</mapper>

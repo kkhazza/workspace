@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+  <select id="test" resultType="Integer">
+    select 1 as cnt
+  </select>
+  <select id="select" parameterType="com.java.web.Bean" resultType="com.java.web.Bean">
+    <!-- select name, txt from box where name = (#{search}) #-자료형 $-결과값만그대로 -->  
+    select `name`, `txt` from box
+  		<if test="name != null">
+  			where `name` like '%${name}%'
+  		</if>
+  </select>
+</mapper>

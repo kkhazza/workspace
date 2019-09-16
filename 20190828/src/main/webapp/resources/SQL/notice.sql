@@ -1,0 +1,9 @@
+CREATE TABLE `notice` (
+	`NO` INT(11) NOT NULL AUTO_INCREMENT,
+	`TXT` VARCHAR(50) NULL DEFAULT NULL,
+	`DELYN` CHAR(1) NOT NULL DEFAULT 'N',
+	PRIMARY KEY (`NO`)
+);
+
+INSERT INTO notice (TXT) VALUES ('JQuery 너무 어렵 ;)');
+INSERT INTO notice (TXT) VALUES ('LocalStorage 너무 좋아 :)');
